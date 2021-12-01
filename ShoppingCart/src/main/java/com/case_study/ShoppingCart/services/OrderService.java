@@ -47,7 +47,6 @@ public class OrderService {
 		
 		cartItemRepository.deleteAllByUser(user);
 		System.out.printf("%nAll Item is deleted from db with User ID = %d%n%n", uid);
-		System.out.println(order);
 		return order;
 	}
 

@@ -19,15 +19,19 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    /**
+     * 17.-------------------- Get Order History ---------------------
+     */
     @GetMapping(path = "/{userId}/getOrders")
     public ResponseEntity<List<Orders>> getOrders(@PathVariable("userId") Long uid) {
         return new ResponseEntity<>(orderService.orderHistory(uid), HttpStatus.OK);
     }
 
+    /**
+     * 18.-------------------- Create Order ---------------------
+     */
     @GetMapping(path = "/{userId}/createOrder")
     public ResponseEntity<Orders> createOrder(@PathVariable("userId") Long uid) {
-    	Orders order = orderService.createOrder(uid);
-    	System.out.println("Controller = " + order);
-        return new ResponseEntity<>(order, HttpStatus.OK);
+        return new ResponseEntity<>(orderService.createOrder(uid), HttpStatus.OK);
     }
 }
