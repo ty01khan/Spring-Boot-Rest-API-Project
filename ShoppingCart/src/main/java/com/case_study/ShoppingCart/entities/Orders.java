@@ -2,15 +2,7 @@ package com.case_study.ShoppingCart.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -45,9 +37,8 @@ public class Orders {
 	@JoinColumn(name = "userId", referencedColumnName = "userID")
 	private Users user;
 
-	@SuppressWarnings("deprecation")
-	@ElementCollection
-	@org.hibernate.annotations.ForeignKey(name = "none")
+	@ManyToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "products", referencedColumnName = "productId")
 	private List<Product> products;
 	private String orderStatus;
 
