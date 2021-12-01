@@ -1,13 +1,16 @@
 package com.case_study.ShoppingCart.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.case_study.ShoppingCart.entities.Orders;
+import com.case_study.ShoppingCart.entities.Product;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.case_study.ShoppingCart.repositories.OrderRepository;
-
+import com.case_study.ShoppingCart.repositories.ProductRepository;
 import com.case_study.ShoppingCart.entities.CartItem;
 import com.case_study.ShoppingCart.repositories.CartItemRepository;
 import com.case_study.ShoppingCart.repositories.UserRepository;
@@ -24,6 +27,9 @@ public class OrderService {
 	CartItemRepository cartItemRepository;
 
 	@Autowired
+	ProductRepository productRepository;
+	
+	@Autowired
 	UserRepository userRepository;
 
 	@Autowired
@@ -37,10 +43,15 @@ public class OrderService {
 			throw new IllegalStateException("Cart is empty");
 		}
 
+		List<Product> product = new ArrayList<Product>();
+		for(CartItem cartItem : products) {
+			product.add(cartItem.getProduct());
+		}
+		
 		System.out.printf("%nOrder is being placed%n%n");
 		Orders order = new Orders(
 			user,
-			products,
+			product,
 			"Order Placed"
 		);
 		orderRepository.save(order);

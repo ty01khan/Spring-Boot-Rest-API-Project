@@ -48,10 +48,10 @@ public class Orders {
 	@SuppressWarnings("deprecation")
 	@ElementCollection
 	@org.hibernate.annotations.ForeignKey(name = "none")
-	private List<CartItem> products;
+	private List<Product> products;
 	private String orderStatus;
 
-	public Orders(Users user, List<CartItem> products, String orderStatus) {
+	public Orders(Users user, List<Product> products, String orderStatus) {
 		super();
 		this.user = user;
 		this.products = products;
